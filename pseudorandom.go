@@ -68,7 +68,7 @@ func findLeastCommonNumbers(nums []int) []int {
 }
 
 func (c *Contestant) printInfo() {
-	fmt.Printf("{%d %d %v %s}\n", c.myScore, c.numbersIHaveChosenInThePast, c.myCurrentNumber, c.behavior)
+	fmt.Printf("{%d %v %s}\n", c.myScore, c.myCurrentNumber, c.behavior)
 }
 
 func (c *Contestant) chooseRandomNumber(numbersChosenLastRound []int) {
@@ -83,11 +83,19 @@ func (c *Contestant) chooseNumber(numbersChosenLastRound []int) {
 			c.myCurrentNumber = generateRandomNumberFromOneToNInclusive(10)
 		}
 	case "opportunist":
-		leastChosenNumbers := findLeastCommonNumbers(numbersChosenLastRound)
-		c.myCurrentNumber = chooseRandomNumberFromSlice(leastChosenNumbers)
+		if len(c.numbersIHaveChosenInThePast) == 0 {
+			c.myCurrentNumber = generateRandomNumberFromOneToNInclusive(10)
+		} else {
+			leastChosenNumbers := findLeastCommonNumbers(numbersChosenLastRound)
+			c.myCurrentNumber = chooseRandomNumberFromSlice(leastChosenNumbers)
+		}
 	case "realEstateAgent":
-		mostChosenNumbers := findMostCommonNumbers(numbersChosenLastRound)
-		c.myCurrentNumber = chooseRandomNumberFromSlice(mostChosenNumbers)
+		if len(c.numbersIHaveChosenInThePast) == 0 {
+			c.myCurrentNumber = generateRandomNumberFromOneToNInclusive(10)
+		} else {
+			mostChosenNumbers := findMostCommonNumbers(numbersChosenLastRound)
+			c.myCurrentNumber = chooseRandomNumberFromSlice(mostChosenNumbers)
+		}
 	case "completelyRandom":
 		c.myCurrentNumber = generateRandomNumberFromOneToNInclusive(10)
 	}
@@ -117,17 +125,19 @@ func simulateOneRound(allContestants []*Contestant, numbersChosenLastRound []int
 		contestant.printInfo()
 	}
 	fmt.Println("round:", numbersChosenLastRound)
+	fmt.Println(" ")
 }
 
 func main() {
 	rand.Seed(time.Now().UnixNano())
 	numbersChosenLastRound := []int{0, 0, 0, 0}
 	allContestants := []*Contestant{
-		{1, 0, 0, []int{}, []int{}, "completelyRandom"},
-		{2, 0, 0, []int{}, []int{}, "rock"},
-		{3, 0, 0, []int{}, []int{}, "opportunist"},
+		{1, 0, 0, []int{}, []int{}, "rock"},
+		{2, 0, 0, []int{}, []int{}, "realEstateAgent"},
+		{3, 0, 0, []int{}, []int{}, "realEstateAgent"},
+		{4, 0, 0, []int{}, []int{}, "realEstateAgent"},
 	}
-	for i := 1; i <= 5; i++ {
+	for i := 1; i <= 1000; i++ {
 		simulateOneRound(allContestants, numbersChosenLastRound)
 	}
 }
