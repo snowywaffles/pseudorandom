@@ -135,7 +135,7 @@ func main() {
 		{1, 0, 0, []int{}, []int{}, "rock"},
 		{2, 0, 0, []int{}, []int{}, "realEstateAgent"},
 		{3, 0, 0, []int{}, []int{}, "realEstateAgent"},
-		{4, 0, 0, []int{}, []int{}, "realEstateAgent"},
+		{4, 0, 0, []int{}, []int{}, "opportunist"},
 	}
 	for i := 1; i <= 1000; i++ {
 		simulateOneRound(allContestants, numbersChosenLastRound)
