@@ -95,8 +95,9 @@ func (c *Contestant) chooseNumber(numbersChosenLastRound []int) {
 }
 
 func simulateOneRound(allContestants []*Contestant, numbersChosenLastRound []int) {
-	for _, contestant := range allContestants {
-		contestant.chooseRandomNumber(numbersChosenLastRound)
+	for i := 0; i < len(allContestants); i++ {
+		contestant := allContestants[i]
+		contestant.chooseNumber(numbersChosenLastRound)
 	}
 
 	numbersChosenLastRound = []int{}
