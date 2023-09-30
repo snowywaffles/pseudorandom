@@ -96,7 +96,7 @@ func (c *Contestant) chooseNumber(numbersChosenLastRound []int) {
 			mostChosenNumbers := findMostCommonNumbers(numbersChosenLastRound)
 			c.myCurrentNumber = chooseRandomNumberFromSlice(mostChosenNumbers)
 		}
-	case "completelyRandom":
+	case "mathematician":
 		c.myCurrentNumber = generateRandomNumberFromOneToNInclusive(10)
 	}
 	c.numbersIHaveChosenInThePast = append(c.numbersIHaveChosenInThePast, c.myCurrentNumber) // add the number chosen to the history
