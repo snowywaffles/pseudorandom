@@ -68,7 +68,7 @@ func findLeastCommonNumbers(nums []int) []int {
 }
 
 func (c *Contestant) printInfo() {
-	fmt.Printf("{%d %d %d %v %s}\n", c.id, c.myScore, c.myCurrentNumber, c.numbersChosenLastRound, c.behavior)
+	fmt.Printf("{%d %d %d %v %s}\n", c.id, c.myScore, c.numbersChosenLastRound, c.myCurrentNumber, c.behavior)
 }
 
 func (c *Contestant) chooseRandomNumber(numbersChosenLastRound []int) {
@@ -100,13 +100,9 @@ func simulateOneRound(allContestants []*Contestant, numbersChosenLastRound []int
 		contestant.printInfo()
 	}
 
-	fmt.Println(numbersChosenLastRound)
 	numbersChosenLastRound = []int{}
-	fmt.Println(numbersChosenLastRound)
-
 	for _, contestant := range allContestants {
 		numbersChosenLastRound = append(numbersChosenLastRound, contestant.myCurrentNumber)
-		contestant.printInfo()
 	}
 
 	numbersMap := make(map[int]int)
@@ -120,7 +116,7 @@ func simulateOneRound(allContestants []*Contestant, numbersChosenLastRound []int
 		}
 		contestant.printInfo()
 	}
-	fmt.Println(numbersChosenLastRound)
+	fmt.Println("round:", numbersChosenLastRound)
 }
 
 func main() {
@@ -129,6 +125,9 @@ func main() {
 	allContestants := []*Contestant{
 		{1, 0, 0, []int{}, []int{}, "completelyRandom"},
 		{2, 0, 0, []int{}, []int{}, "rock"},
+		{3, 0, 0, []int{}, []int{}, "opportunist"},
 	}
-	simulateOneRound(allContestants, numbersChosenLastRound)
+	for i := 1; i <= 5; i++ {
+		simulateOneRound(allContestants, numbersChosenLastRound)
+	}
 }
