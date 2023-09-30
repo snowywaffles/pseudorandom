@@ -68,7 +68,7 @@ func findLeastCommonNumbers(nums []int) []int {
 }
 
 func (c *Contestant) printInfo() {
-	fmt.Printf("{%d %d %d %v %s}\n", c.id, c.myScore, c.numbersChosenLastRound, c.myCurrentNumber, c.behavior)
+	fmt.Printf("{%d %d %v %s}\n", c.myScore, c.numbersIHaveChosenInThePast, c.myCurrentNumber, c.behavior)
 }
 
 func (c *Contestant) chooseRandomNumber(numbersChosenLastRound []int) {
@@ -97,7 +97,6 @@ func (c *Contestant) chooseNumber(numbersChosenLastRound []int) {
 func simulateOneRound(allContestants []*Contestant, numbersChosenLastRound []int) {
 	for _, contestant := range allContestants {
 		contestant.chooseRandomNumber(numbersChosenLastRound)
-		contestant.printInfo()
 	}
 
 	numbersChosenLastRound = []int{}
