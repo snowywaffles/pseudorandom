@@ -110,14 +110,18 @@ func main() {
 	numbersChosenLastRound = []int{}
 	fmt.Println(numbersChosenLastRound)
 
-	// used for updating score
+	for _, contestant := range allContestants {
+		numbersChosenLastRound = append(numbersChosenLastRound, contestant.myCurrentNumber)
+		contestant.printInfo()
+	}
+
 	numbersMap := make(map[int]int)
 	for _, num := range numbersChosenLastRound {
 		numbersMap[num]++
 	}
 
 	for _, contestant := range allContestants {
-		numbersChosenLastRound = append(numbersChosenLastRound, contestant.myCurrentNumber)
+		fmt.Println(numbersMap, contestant.myCurrentNumber)
 		if numbersMap[contestant.myCurrentNumber] == 1 {
 			contestant.myScore++
 		}
