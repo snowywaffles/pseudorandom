@@ -94,13 +94,7 @@ func (c *Contestant) chooseNumber(numbersChosenLastRound []int) {
 	c.numbersIHaveChosenInThePast = append(c.numbersIHaveChosenInThePast, c.myCurrentNumber) // add the number chosen to the history
 }
 
-func main() {
-	rand.Seed(time.Now().UnixNano())
-	numbersChosenLastRound := []int{0, 0, 0, 0}
-	allContestants := []*Contestant{
-		{1, 0, 0, []int{}, []int{}, "completelyRandom"},
-		{2, 0, 0, []int{}, []int{}, "rock"},
-	}
+func simulateOneRound(allContestants []*Contestant, numbersChosenLastRound []int) {
 	for _, contestant := range allContestants {
 		contestant.chooseRandomNumber(numbersChosenLastRound)
 		contestant.printInfo()
@@ -121,11 +115,20 @@ func main() {
 	}
 
 	for _, contestant := range allContestants {
-		fmt.Println(numbersMap, contestant.myCurrentNumber)
 		if numbersMap[contestant.myCurrentNumber] == 1 {
 			contestant.myScore++
 		}
 		contestant.printInfo()
 	}
 	fmt.Println(numbersChosenLastRound)
+}
+
+func main() {
+	rand.Seed(time.Now().UnixNano())
+	numbersChosenLastRound := []int{0, 0, 0, 0}
+	allContestants := []*Contestant{
+		{1, 0, 0, []int{}, []int{}, "completelyRandom"},
+		{2, 0, 0, []int{}, []int{}, "rock"},
+	}
+	simulateOneRound(allContestants, numbersChosenLastRound)
 }
